@@ -25,7 +25,7 @@ namespace Registro_Escuela
             do
             {
                
-                Console.Title = "Registro de la escuela MARIA SE LA TRAGA";
+                Console.Title = "Registro de la escuela";
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("1- Registrar Estudiante.\r\n2- Consulta informacion de estudiante.\r\n3- Registrar Calificaciones de estudiantes.\r\n4- Consultar Calificaciones de estudiante.\r\n0- Para Salir.");
