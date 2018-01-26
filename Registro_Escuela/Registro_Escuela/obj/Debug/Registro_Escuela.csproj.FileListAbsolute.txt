@@ -5,3 +5,10 @@ C:\Users\Madara\source\repos\Registro_Escuela\Registro_Escuela\obj\Debug\Registr
 C:\Users\Madara\source\repos\Registro_Escuela\Registro_Escuela\obj\Debug\Registro_Escuela.exe
 C:\Users\Madara\source\repos\Registro_Escuela\Registro_Escuela\obj\Debug\Registro_Escuela.pdb
 C:\Users\Madara\source\repos\Registro_Escuela\Registro_Escuela\obj\Debug\Registro_Escuela.csprojResolveAssemblyReference.cache
+C:\Users\Madara\Repositorios\Escuela\Escuela\Registro_Escuela\Registro_Escuela\bin\Debug\Registro_Escuela.exe.config
+C:\Users\Madara\Repositorios\Escuela\Escuela\Registro_Escuela\Registro_Escuela\bin\Debug\Registro_Escuela.exe
+C:\Users\Madara\Repositorios\Escuela\Escuela\Registro_Escuela\Registro_Escuela\bin\Debug\Registro_Escuela.pdb
+C:\Users\Madara\Repositorios\Escuela\Escuela\Registro_Escuela\Registro_Escuela\obj\Debug\Registro_Escuela.csprojResolveAssemblyReference.cache
+C:\Users\Madara\Repositorios\Escuela\Escuela\Registro_Escuela\Registro_Escuela\obj\Debug\Registro_Escuela.csproj.CoreCompileInputs.cache
+C:\Users\Madara\Repositorios\Escuela\Escuela\Registro_Escuela\Registro_Escuela\obj\Debug\Registro_Escuela.exe
+C:\Users\Madara\Repositorios\Escuela\Escuela\Registro_Escuela\Registro_Escuela\obj\Debug\Registro_Escuela.pdb
