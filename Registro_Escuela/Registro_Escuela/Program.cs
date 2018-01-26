@@ -70,12 +70,12 @@ namespace Registro_Escuela
 
         public void Registrar_Estudiante()
         {
-            _estudiante = new Estudiante();
-            materias_ = new Materias();
-
             string Respuesta = "SI";
             do
             {
+                _estudiante = new Estudiante();
+                materias_ = new Materias();
+
                 Console.Title = "Registro De Nuevo Estudiante";
                 Console.Clear();
                 Console.Write("Nombre estudiante: ");
@@ -84,15 +84,14 @@ namespace Registro_Escuela
                 _estudiante.Apellido = Console.ReadLine().ToUpper();
                 Console.Write("Edad del estudiante: ");
                 _estudiante.Edad = Console.ReadLine().ToUpper();
-                _estudiante.Matricula = _estudiante.Nombre[0].ToString() + _estudiante.Apellido[0].ToString()+ _estudiante.Edad;
-                Console.WriteLine("Matricula del estudiante: {0}", _estudiante.Matricula);
+                Console.WriteLine("Matricula del estudiante: {0}", _estudiante.Matricula = _estudiante.Nombre[0].ToString() + _estudiante.Apellido[0].ToString() + _estudiante.Edad);
 
                 materias_.Matricula += _estudiante.Matricula;
-                materias_.Español = "0";
-                materias_.Matematicas = "0";
-                materias_.Fisica = "0";
-                materias_.Quimica = "0";
-                materias_.Promedio = "0";
+                materias_.Español = 0;
+                materias_.Matematicas = 0;
+                materias_.Fisica = 0;
+                materias_.Quimica = 0;
+                materias_.Promedio = 0;
 
                 Console.Write("Grado que va cursando el estudiante: ");
                 _estudiante.Grado = Console.ReadLine().ToUpper();
@@ -167,17 +166,16 @@ namespace Registro_Escuela
                         Lista_Estudiante[x].Apellido = Console.ReadLine().ToUpper();
                         Console.Write("Edad del estudiante: ");
                         Lista_Estudiante[x].Edad = Console.ReadLine().ToUpper();
-                        Console.Write("Matricula del estudiante: ");
-                        Lista_Estudiante[x].Matricula = Console.ReadLine().ToUpper();
+                        Console.WriteLine("Matricula del estudiante: {0}", Lista_Estudiante[x].Apellido = Lista_Estudiante[x].Nombre[0].ToString() + Lista_Estudiante[x].Apellido[0].ToString() + Lista_Estudiante[x].Edad);
                         Console.Write("Grado que va cursando el estudiante: ");
                         Lista_Estudiante[x].Grado = Console.ReadLine().ToUpper();
 
                         Lista_Materias[x].Matricula += Lista_Estudiante[x].Matricula;
-                        Lista_Materias[x].Español = "0";
-                        Lista_Materias[x].Matematicas = "0"; 
-                        Lista_Materias[x].Fisica = "0";
-                        Lista_Materias[x].Quimica = "0";
-                        Lista_Materias[x].Promedio = "0";
+                        Lista_Materias[x].Español = 0;
+                        Lista_Materias[x].Matematicas = 0; 
+                        Lista_Materias[x].Fisica = 0;
+                        Lista_Materias[x].Quimica = 0;
+                        Lista_Materias[x].Promedio = 0;
 
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Datos modificados satisfactoriamente.");
@@ -232,12 +230,12 @@ namespace Registro_Escuela
                         Console.WriteLine("Edad      : {0}", Lista_Estudiante[x].Edad);
                         Console.WriteLine("Grado     : {0}", Lista_Estudiante[x].Grado);
 
-                        if (Convert.ToDouble(Lista_Materias[x].Promedio) >= 70)
+                        if (Lista_Materias[x].Promedio >= 70)
                         {
                             Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
                         }
                         else
-                            if (Convert.ToDouble(Lista_Materias[x].Promedio) <= 69)
+                            if (Lista_Materias[x].Promedio <= 69)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
@@ -294,15 +292,15 @@ namespace Registro_Escuela
 
                         do
                         {
-                            if(Convert.ToDouble(Lista_Materias[x].Español) >= 101)
+                            if (Lista_Materias[x].Español >= 101)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Calificacion no valida, la calificacion no puede ser mayor a 100: ");
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                             }
 
-                            Lista_Materias[x].Español = Console.ReadLine();
-                        }while (Convert.ToDouble(Lista_Materias[x].Español) >= 101);
+                            Lista_Materias[x].Español = double.Parse(Console.ReadLine());
+                        } while (Lista_Materias[x].Español >= 101);
                         
                         Console.Write("Digite la calificacion de Matematicas: ");
 
@@ -315,8 +313,8 @@ namespace Registro_Escuela
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                             }
 
-                            Lista_Materias[x].Matematicas = Console.ReadLine();
-                        } while (Convert.ToDouble(Lista_Materias[x].Matematicas) >= 101);
+                            Lista_Materias[x].Matematicas = double.Parse(Console.ReadLine());
+                        } while (Lista_Materias[x].Matematicas >= 101);
 
                         Console.Write("Digite la calificacion de Fisica: ");
 
@@ -329,8 +327,8 @@ namespace Registro_Escuela
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                             }
 
-                            Lista_Materias[x].Fisica = Console.ReadLine();
-                        } while (Convert.ToDouble(Lista_Materias[x].Fisica) >= 101);
+                            Lista_Materias[x].Fisica = double.Parse(Console.ReadLine());
+                        } while (Lista_Materias[x].Fisica >= 101);
                         
                         Console.Write("Digite la calificacion de Quimica: ");
 
@@ -343,17 +341,17 @@ namespace Registro_Escuela
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                             }
 
-                            Lista_Materias[x].Quimica = Console.ReadLine();
+                            Lista_Materias[x].Quimica = double.Parse(Console.ReadLine());
                         } while (Convert.ToDouble(Lista_Materias[x].Quimica) >= 101);
 
-                        Lista_Materias[x].Promedio = Convert.ToString(materias_.Promediar(Convert.ToDouble(Lista_Materias[x].Español), Convert.ToDouble(Lista_Materias[x].Matematicas), Convert.ToDouble(Lista_Materias[x].Fisica), Convert.ToDouble(Lista_Materias[x].Quimica)));
+                        Lista_Materias[x].Promedio = materias_.Promediar(Lista_Materias[x].Español, Lista_Materias[x].Matematicas, Lista_Materias[x].Fisica, Lista_Materias[x].Quimica);
 
-                        if (Convert.ToDouble(Lista_Materias[x].Promedio) >= 70)
+                        if (Lista_Materias[x].Promedio >= 70)
                         {
                             Lista_Estudiante[x].Estado = "APROBADO";
                         }
                         else
-                            if (Convert.ToDouble(Lista_Materias[x].Promedio) <= 69)
+                            if (Lista_Materias[x].Promedio <= 69)
                         {
                             Lista_Estudiante[x].Estado = "REPROBADO";
                         }
@@ -454,11 +452,11 @@ namespace Registro_Escuela
     class Materias
     {
         public string Matricula { set; get; }
-        public string Español { set; get; }
-        public string Matematicas { set; get; }
-        public string Fisica { set; get; }
-        public string Quimica { set; get; }
-        public string Promedio { set; get; }
+        public double Español { set; get; }
+        public double Matematicas { set; get; }
+        public double Fisica { set; get; }
+        public double Quimica { set; get; }
+        public double Promedio { set; get; }
 
         public double Promediar(double Español, double Matematicas, double Fisica, double Quimica)
         {
