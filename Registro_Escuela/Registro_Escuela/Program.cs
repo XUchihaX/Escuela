@@ -130,10 +130,24 @@ namespace Registro_Escuela
                 Console.Write("Digite el nombre del estudiante: ");
                 nombre = Console.ReadLine().ToUpper();
 
+                int ex = 0;
+                bool encontrado = false;
+
                 for (int x = 0; x < Lista_Estudiante.Count; x++)
                 {
+                    ex++;
+                    if (Lista_Estudiante[x].Nombre != nombre && ex == Lista_Estudiante.Count && encontrado != true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("No se encontro ningun estudiante registrado con ese nombre.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("\n");
+                    }
+
                     if (Lista_Estudiante[x].Nombre == nombre)
                     {
+                        encontrado = true;
+
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("Datos del estudiante que se van a modificar.");
                         Console.WriteLine("================================================================");
@@ -143,12 +157,12 @@ namespace Registro_Escuela
                         Console.WriteLine("Edad      : {0}", Lista_Estudiante[x].Edad);
                         Console.WriteLine("Grado     : {0}", Lista_Estudiante[x].Grado);
 
-                        if (Convert.ToDouble(Lista_Materias[x].Promedio) >= 70)
+                        if (Lista_Materias[x].Promedio >= 70)
                         {
                             Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
                         }
                         else
-                            if (Convert.ToDouble(Lista_Materias[x].Promedio) <= 69)
+                            if (Lista_Materias[x].Promedio <= 69)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
@@ -166,10 +180,11 @@ namespace Registro_Escuela
                         Lista_Estudiante[x].Apellido = Console.ReadLine().ToUpper();
                         Console.Write("Edad del estudiante: ");
                         Lista_Estudiante[x].Edad = Console.ReadLine().ToUpper();
-                        Console.WriteLine("Matricula del estudiante: {0}", Lista_Estudiante[x].Apellido = Lista_Estudiante[x].Nombre[0].ToString() + Lista_Estudiante[x].Apellido[0].ToString() + Lista_Estudiante[x].Edad);
+                        Console.WriteLine("Matricula del estudiante: {0}", Lista_Estudiante[x].Matricula = Lista_Estudiante[x].Nombre[0].ToString() + Lista_Estudiante[x].Apellido[0].ToString() + Lista_Estudiante[x].Edad);
                         Console.Write("Grado que va cursando el estudiante: ");
                         Lista_Estudiante[x].Grado = Console.ReadLine().ToUpper();
 
+                        Lista_Materias[x].Matricula = string.Empty;
                         Lista_Materias[x].Matricula += Lista_Estudiante[x].Matricula;
                         Lista_Materias[x].Español = 0;
                         Lista_Materias[x].Matematicas = 0; 
@@ -222,6 +237,7 @@ namespace Registro_Escuela
 
                     if (Lista_Estudiante[x].Nombre == nombre)
                     {
+                        encontrado = true;
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("================================================================");
                         Console.WriteLine("Matricula : {0}", Lista_Estudiante[x].Matricula);
@@ -232,7 +248,7 @@ namespace Registro_Escuela
 
                         if (Lista_Materias[x].Promedio >= 70)
                         {
-                            Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
+                            Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
                         }
                         else
                             if (Lista_Materias[x].Promedio <= 69)
@@ -246,7 +262,6 @@ namespace Registro_Escuela
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write("\n");
                         Console.ReadKey();
-                        encontrado = true;
                     }
                 }
             }
@@ -266,7 +281,7 @@ namespace Registro_Escuela
 
             if (Lista_Materias.Count > 0)
             {
-                Console.WriteLine("Digite la matricula del estudiante:");
+                Console.Write("Digite la matricula del estudiante: ");
                 matricula_ = Console.ReadLine().ToUpper();
 
                 int ex = 0;
@@ -275,18 +290,20 @@ namespace Registro_Escuela
                 for (int x = 0; x < Lista_Materias.Count; x++)
                 {
                     ex++;
+
+                    if (Lista_Materias[x].Matricula != matricula_ && ex == Lista_Materias.Count && encontrado != true)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("MATRICULA NO ENCONTRADA: ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ReadKey();
+                    }
+
                     if (Lista_Materias[x].Matricula == matricula_)
                     {
-                        if(Lista_Materias[x].Matricula != matricula_ && ex == Lista_Materias.Count && encontrado != true)
-                        {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("MATRICULA NO ENCONTRADA: ");
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.ReadKey();
-                        }
+                        encontrado = true;
 
-                        Console.Clear();
                         Console.WriteLine("Matricula del Estudiante: {0}", Lista_Materias[x].Matricula);
                         Console.Write("Digite la calificacion de Español: ");
 
@@ -412,12 +429,12 @@ namespace Registro_Escuela
                         Console.WriteLine("Nota de Quimica          : {0}", Lista_Materias[x].Quimica);
                         Console.WriteLine("Promedio                 : {0}", Lista_Materias[x].Promedio);
 
-                        if (Convert.ToDouble(Lista_Materias[x].Promedio) >= 70 )
+                        if (Lista_Materias[x].Promedio >= 70 )
                         {
                             Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
                         }
                         else
-                            if( Convert.ToDouble(Lista_Materias[x].Promedio) <= 69)
+                            if(Lista_Materias[x].Promedio <= 69)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
