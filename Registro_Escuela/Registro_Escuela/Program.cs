@@ -26,16 +26,23 @@ namespace Registro_Escuela
                 Console.Title = "Registro de la escuela";
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("1- Registrar Estudiante.\r\n2- Modificar informacion de estudiante.\r\n3- Consulta informacion de estudiante.\r\n4- Registrar Calificaciones de estudiantes.\r\n5- Consultar Calificaciones de estudiante.\r\n0- Para Salir.");
-                do
+
+                while (!int.TryParse(Console.ReadLine(), out Seleccion))
                 {
-                    if(Seleccion != 1 && Seleccion != 2 && Seleccion != 3 && Seleccion != 4 && Seleccion != 5 && Seleccion != 0)
-                    {
-                        Console.Write("Opcion no valida, vuelva a introducir otra opcion: ");
-                    }
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Solo se puede hacer la seleccion con numeros.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("1- Registrar Estudiante.\r\n2- Modificar informacion de estudiante.\r\n3- Consulta informacion de estudiante.\r\n4- Registrar Calificaciones de estudiantes.\r\n5- Consultar Calificaciones de estudiante.\r\n0- Para Salir.");
+                }
 
-                    Seleccion = int.Parse(Console.ReadLine());
-
-                } while (Seleccion != 1 && Seleccion != 2 && Seleccion != 3 && Seleccion != 4 && Seleccion != 5 && Seleccion != 0);
+                if (Seleccion != 1 && Seleccion != 2 && Seleccion != 3 && Seleccion != 4 && Seleccion != 5 && Seleccion != 0)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Opcion no valida, vuelva a introducir otra opcion!!");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
 
                 switch (Seleccion)
                 {
@@ -297,69 +304,98 @@ namespace Registro_Escuela
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("MATRICULA NO ENCONTRADA: ");
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.ReadKey();
                     }
 
                     if (Lista_Materias[x].Matricula == matricula_)
                     {
                         encontrado = true;
-
+                        double Numero = 0;
                         Console.WriteLine("Matricula del Estudiante: {0}", Lista_Materias[x].Matricula);
+
                         Console.Write("Digite la calificacion de Español: ");
-
                         do
                         {
-                            if (Lista_Materias[x].Español >= 101)
+                            while (!double.TryParse(Console.ReadLine(), out Numero))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Calificacion no valida, la calificacion no puede ser mayor a 100: ");
-                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine("Solo se pueden introducir numeros.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Español: ");
                             }
+                            Lista_Materias[x].Español = Numero;
 
-                            Lista_Materias[x].Español = double.Parse(Console.ReadLine());
+                            if(Lista_Materias[x].Español >= 101)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Calificacion no valida, la calificacion no puede ser mayor a 100.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Español: ");
+                            }
                         } while (Lista_Materias[x].Español >= 101);
-                        
-                        Console.Write("Digite la calificacion de Matematicas: ");
 
+
+                        Console.Write("Digite la calificacion de Matematicas: ");
                         do
                         {
-                            if (Convert.ToDouble(Lista_Materias[x].Matematicas) >= 101)
+                            while (!double.TryParse(Console.ReadLine(), out Numero))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write("Calificacion no valida, la calificacion no puede ser mayor a 100: ");
-                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine("Solo se pueden introducir numeros.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Matematicas: ");
                             }
+                            Lista_Materias[x].Matematicas = Numero;
 
-                            Lista_Materias[x].Matematicas = double.Parse(Console.ReadLine());
+                            if (Lista_Materias[x].Matematicas >= 101)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Calificacion no valida, la calificacion no puede ser mayor a 100.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Matematicas: ");
+                            }
                         } while (Lista_Materias[x].Matematicas >= 101);
 
                         Console.Write("Digite la calificacion de Fisica: ");
-
                         do
                         {
-                            if (Convert.ToDouble(Lista_Materias[x].Fisica) >= 101)
+                            while (!double.TryParse(Console.ReadLine(), out Numero))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write("Calificacion no valida, la calificacion no puede ser mayor a 100: ");
-                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine("Solo se pueden introducir numeros.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Fisica: ");
                             }
+                            Lista_Materias[x].Fisica = Numero;
 
-                            Lista_Materias[x].Fisica = double.Parse(Console.ReadLine());
+                            if (Lista_Materias[x].Fisica >= 101)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Calificacion no valida, la calificacion no puede ser mayor a 100.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Fisica: ");
+                            }
                         } while (Lista_Materias[x].Fisica >= 101);
-                        
-                        Console.Write("Digite la calificacion de Quimica: ");
 
+                        Console.Write("Digite la calificacion de Quimica: ");
                         do
                         {
-                            if (Convert.ToDouble(Lista_Materias[x].Quimica) >= 101)
+                            while (!double.TryParse(Console.ReadLine(), out Numero))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write("Calificacion no valida, la calificacion no puede ser mayor a 100: ");
-                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine("Solo se pueden introducir numeros.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Quimica: ");
                             }
+                            Lista_Materias[x].Quimica = Numero;
 
-                            Lista_Materias[x].Quimica = double.Parse(Console.ReadLine());
-                        } while (Convert.ToDouble(Lista_Materias[x].Quimica) >= 101);
+                            if (Lista_Materias[x].Quimica >= 101)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Calificacion no valida, la calificacion no puede ser mayor a 100.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("Digite la calificacion de Quimica: ");
+                            }
+                        } while (Lista_Materias[x].Quimica >= 101);
 
                         Lista_Materias[x].Promedio = materias_.Promediar(Lista_Materias[x].Español, Lista_Materias[x].Matematicas, Lista_Materias[x].Fisica, Lista_Materias[x].Quimica);
 
@@ -418,6 +454,7 @@ namespace Registro_Escuela
                     if (Lista_Materias[x].Matricula == matricula)
                     {
                         Console.Clear();
+                        encontrado = true;
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("================================================================");
                         Console.WriteLine("Calificaciones.");
@@ -444,7 +481,6 @@ namespace Registro_Escuela
                         Console.WriteLine("================================================================");
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.ReadKey();
-                        encontrado = true;
                     }
                 }
             }
