@@ -25,7 +25,7 @@ namespace Registro_Escuela
             {
                 Console.Title = "Registro de la escuela";
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("1- Registrar Estudiante.\r\n2- Modificar informacion de estudiante.\r\n3- Consulta informacion de estudiante.\r\n4- Registrar Calificaciones de estudiantes.\r\n5- Consultar Calificaciones de estudiante.\r\n0- Para Salir.");
+                Console.WriteLine("1- REGISTRAR ESTUDIANTE.\r\n2- MODIFICAR INFORMACION DE ESTUDIANTE.\r\n3- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n4- CONSULTAR INFORMACION DE TODOS LOS ESTUDIANTES REGISTRADOS.\r\n5- REGISTRAR CALIFICACIONES DE ESTUDIANTE.\r\n6- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n7- CONSULTAR CALIFICACIONES DE TODOS LOS ESTUDIANTES.\r\n0- PARA SALIR.");
 
                 while (!int.TryParse(Console.ReadLine(), out Seleccion))
                 {
@@ -33,10 +33,10 @@ namespace Registro_Escuela
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Solo se puede hacer la seleccion con numeros.");
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("1- Registrar Estudiante.\r\n2- Modificar informacion de estudiante.\r\n3- Consulta informacion de estudiante.\r\n4- Registrar Calificaciones de estudiantes.\r\n5- Consultar Calificaciones de estudiante.\r\n0- Para Salir.");
+                    Console.WriteLine("1- REGISTRAR ESTUDIANTE.\r\n2- MODIFICAR INFORMACION DE ESTUDIANTE.\r\n3- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n4- CONSULTAR INFORMACION DE TODOS LOS ESTUDIANTES REGISTRADOS.\r\n5- REGISTRAR CALIFICACIONES DE ESTUDIANTE.\r\n6- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n7- CONSULTAR CALIFICACIONES DE TODOS LOS ESTUDIANTES.\r\n0- PARA SALIR.");
                 }
 
-                if (Seleccion != 1 && Seleccion != 2 && Seleccion != 3 && Seleccion != 4 && Seleccion != 5 && Seleccion != 0)
+                if (Seleccion != 1 && Seleccion != 2 && Seleccion != 3 && Seleccion != 4 && Seleccion != 5 && Seleccion != 6 && Seleccion != 7 && Seleccion != 0)
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -56,10 +56,16 @@ namespace Registro_Escuela
                         Registro.Consultar_Estudiante();
                         break;
                     case 4:
-                        Registro.Registrar_Calificaciones();
+                        Registro.Consultar_Estudiantes_Todos();
                         break;
                     case 5:
+                        Registro.Registrar_Calificaciones();
+                        break;
+                    case 6:
                         Registro.Consultar_Notas();
+                        break;
+                    case 7:
+                        Registro.Consultar_Notas_Todas();
                         break;
                 }
 
@@ -204,7 +210,6 @@ namespace Registro_Escuela
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.ReadKey();
                         Console.Clear();
-
                     }
                 }
             }
@@ -266,7 +271,6 @@ namespace Registro_Escuela
                         }
 
                         Console.WriteLine("================================================================");
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write("\n");
                         Console.ReadKey();
                     }
@@ -277,6 +281,46 @@ namespace Registro_Escuela
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("NO HAY ESTUDIANTES REGISTRADOS.");
             }
+        }
+        public void Consultar_Estudiantes_Todos()
+        {
+            Console.Clear();
+            Console.Title = "Todos los estudiantes registrados";
+            
+            if(Lista_Estudiante.Count > 0)
+            {
+                for (int x = 0; x < Lista_Estudiante.Count; x++)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("================================================================");
+                    Console.WriteLine("Matricula : {0}", Lista_Estudiante[x].Matricula);
+                    Console.WriteLine("Nombre    : {0}", Lista_Estudiante[x].Nombre);
+                    Console.WriteLine("Apellido  : {0}", Lista_Estudiante[x].Apellido);
+                    Console.WriteLine("Edad      : {0}", Lista_Estudiante[x].Edad);
+                    Console.WriteLine("Grado     : {0}", Lista_Estudiante[x].Grado);
+
+                    if (Lista_Materias[x].Promedio >= 70)
+                    {
+                        Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
+                    }
+                    else
+                        if (Lista_Materias[x].Promedio <= 69)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                    Console.WriteLine("================================================================");
+                    Console.Write("\n");
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("NO HAY ESTUDIANTES REGISTRADOS.");
+            }
+
         }
         public void Registrar_Calificaciones()
         {
@@ -302,7 +346,7 @@ namespace Registro_Escuela
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("MATRICULA NO ENCONTRADA: ");
+                        Console.WriteLine("MATRICULA NO ENCONTRADA. ");
                         Console.ForegroundColor = ConsoleColor.Yellow;
                     }
 
@@ -446,7 +490,7 @@ namespace Registro_Escuela
                     if (Lista_Materias[x].Matricula != matricula && ex == Lista_Materias.Count && encontrado != true)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("No se encontro ningun estudiante registrado con ese nombre.");
+                        Console.WriteLine("NO SE ENCONTRO NINGUN ESTUDIANTE CON ESA MATRICULA.");
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write("\n");
                     }
@@ -479,7 +523,6 @@ namespace Registro_Escuela
                         }
 
                         Console.WriteLine("================================================================");
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.ReadKey();
                     }
                 }
@@ -490,8 +533,48 @@ namespace Registro_Escuela
                 Console.WriteLine("NO HAY ESTUDIANTES REGISTRADOS.");
             }
         }
-    }
+        public void Consultar_Notas_Todas()
+        {
+            Console.Clear();
+            Console.Title = "Calificaciones de todos los estudiantes registrados";
 
+            if(Lista_Materias.Count > 0)
+            {
+                for (int x = 0; x < Lista_Materias.Count; x++)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("================================================================");
+                    Console.WriteLine("Calificaciones.");
+                    Console.WriteLine("Matricula del Estudiante : {0}", Lista_Materias[x].Matricula);
+                    Console.WriteLine("Nombre Completo          : {0} {1}", Lista_Estudiante[x].Nombre, Lista_Estudiante[x].Apellido);
+                    Console.WriteLine("Nota Español             : {0}", Lista_Materias[x].Español);
+                    Console.WriteLine("Nota de Matematicas      : {0}", Lista_Materias[x].Matematicas);
+                    Console.WriteLine("Nota de Fisica           : {0}", Lista_Materias[x].Fisica);
+                    Console.WriteLine("Nota de Quimica          : {0}", Lista_Materias[x].Quimica);
+                    Console.WriteLine("Promedio                 : {0}", Lista_Materias[x].Promedio);
+
+                    if (Lista_Materias[x].Promedio >= 70)
+                    {
+                        Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
+                    }
+                    else
+                        if (Lista_Materias[x].Promedio <= 69)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                    Console.WriteLine("================================================================");
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("NO HAY ESTUDIANTES REGISTRADOS.");
+            }
+        }
+    }
     class Estudiante
     {
         public string Nombre { set; get; }
