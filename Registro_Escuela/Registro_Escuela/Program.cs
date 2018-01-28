@@ -121,7 +121,7 @@ namespace Registro_Escuela
                 Console.WriteLine("Desea Registrar otro estudiante? SI/NO");
                 Respuesta = Console.ReadLine().ToUpper();
 
-                while(Respuesta !="SI" && Respuesta != "NO")
+                while(Respuesta != "SI" && Respuesta != "NO")
                 {
                     Console.WriteLine("Solo puede responder: SI o NO");
                     Respuesta = Console.ReadLine().ToUpper();
@@ -142,7 +142,7 @@ namespace Registro_Escuela
             {
                 Console.Write("Digite el nombre del estudiante: ");
                 nombre = Console.ReadLine().ToUpper();
-
+                
                 int ex = 0;
                 bool encontrado = false;
 
@@ -286,8 +286,9 @@ namespace Registro_Escuela
         {
             Console.Clear();
             Console.Title = "Todos los estudiantes registrados";
-            
-            if(Lista_Estudiante.Count > 0)
+            Console.Write("\n");
+
+            if (Lista_Estudiante.Count > 0)
             {
                 for (int x = 0; x < Lista_Estudiante.Count; x++)
                 {
@@ -441,7 +442,7 @@ namespace Registro_Escuela
                             }
                         } while (Lista_Materias[x].Quimica >= 101);
 
-                        Lista_Materias[x].Promedio = materias_.Promediar(Lista_Materias[x].Español, Lista_Materias[x].Matematicas, Lista_Materias[x].Fisica, Lista_Materias[x].Quimica);
+                        Lista_Materias[x].Promedio = Materias.Promediar(Lista_Materias[x].Español, Lista_Materias[x].Matematicas, Lista_Materias[x].Fisica, Lista_Materias[x].Quimica);
 
                         if (Lista_Materias[x].Promedio >= 70)
                         {
@@ -594,7 +595,7 @@ namespace Registro_Escuela
         public double Quimica { set; get; }
         public double Promedio { set; get; }
 
-        public double Promediar(double Español, double Matematicas, double Fisica, double Quimica)
+        public static double Promediar(double Español, double Matematicas, double Fisica, double Quimica)
         {
             double _promedio = (Español + Matematicas + Fisica + Quimica) / 4;
 
