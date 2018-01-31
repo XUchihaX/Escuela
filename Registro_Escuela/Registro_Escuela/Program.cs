@@ -84,19 +84,58 @@ namespace Registro_Escuela
         public void Registrar_Estudiante()
         {
             string Respuesta = "SI";
+
             do
-            {
+            {              
                 _estudiante = new Estudiante();
                 materias_ = new Materias();
+                int Numero = 0;
 
                 Console.Title = "Registro De Nuevo Estudiante";
                 Console.Clear();
                 Console.Write("Nombre estudiante: ");
                 _estudiante.Nombre = Console.ReadLine().ToUpper();
+
+                while(!Validar.SoloLetras(_estudiante.Nombre))
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("EL NOMBRE NO PUEDE CONTENER LETRAS. ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.Write("Nombre estudiante: ");
+                    _estudiante.Nombre = Console.ReadLine().ToUpper();
+                }
+
                 Console.Write("Apellido del estudiante: ");
                 _estudiante.Apellido = Console.ReadLine().ToUpper();
+
+                while (!Validar.SoloLetras(_estudiante.Apellido))
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("EL APELLIDO NO PUEDE CONTENER LETRAS. ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.Write("Apellido del estudiante: ");
+                    _estudiante.Apellido = Console.ReadLine().ToUpper();
+                }
+
                 Console.Write("Edad del estudiante: ");
-                _estudiante.Edad = Console.ReadLine().ToUpper();
+
+                while (!int.TryParse(Console.ReadLine(), out Numero))
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("LA EDAD SOLO PUEDE CONTENER NUMEROS.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Edad del estudiante: ");
+                }
+
+                _estudiante.Edad = Convert.ToString(Numero);
+
                 Console.WriteLine("Matricula del estudiante: {0}", _estudiante.Matricula = _estudiante.Nombre[0].ToString() + _estudiante.Apellido[0].ToString() + _estudiante.Edad);
 
                 materias_.Matricula += _estudiante.Matricula;
@@ -107,7 +146,23 @@ namespace Registro_Escuela
                 materias_.Promedio = 0;
 
                 Console.Write("Grado que va cursando el estudiante: ");
-                _estudiante.Grado = Console.ReadLine().ToUpper();
+
+                int conteo = 0;
+                do
+                {
+                    conteo++;
+                    if(conteo >= 2)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("EL GRADO DE ESTUDIANTE SOLO PUEDE SER: 1ro/2do/3ro/4to");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+
+                    _estudiante.Grado = Console.ReadLine().ToLower();
+
+                } while (_estudiante.Grado != "1ro" || _estudiante.Grado != "2do" || _estudiante.Grado != "3ro" || _estudiante.Grado != "4to");
+
                 _estudiante.Estado = "N/D";
                 Console.Clear();
 
