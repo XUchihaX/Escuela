@@ -25,7 +25,7 @@ namespace Registro_Escuela
             {
                 Console.Title = "Registro de la escuela";
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("1- REGISTRAR ESTUDIANTE.\r\n2- MODIFICAR INFORMACION DE ESTUDIANTE.\r\n3- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n4- CONSULTAR INFORMACION DE TODOS LOS ESTUDIANTES REGISTRADOS.\r\n5- REGISTRAR CALIFICACIONES DE ESTUDIANTE.\r\n6- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n7- CONSULTAR CALIFICACIONES DE TODOS LOS ESTUDIANTES.\r\n0- PARA SALIR.");
+                Console.WriteLine("1- REGISTRAR ESTUDIANTE.\r\n2- MODIFICAR INFORMACION DE ESTUDIANTE.\r\n3- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n4- CONSULTAR INFORMACION DE TODOS LOS ESTUDIANTES REGISTRADOS.\r\n5- REGISTRAR CALIFICACIONES DE ESTUDIANTE.\r\n6- CONSULTAR CALIFICACIONES DE ESTUDIANTE.\r\n7- CONSULTAR CALIFICACIONES DE TODOS LOS ESTUDIANTES.\r\n0- PARA SALIR.");
 
                 while (!int.TryParse(Console.ReadLine(), out Seleccion))
                 {
@@ -33,7 +33,7 @@ namespace Registro_Escuela
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Solo se puede hacer la seleccion con numeros.");
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("1- REGISTRAR ESTUDIANTE.\r\n2- MODIFICAR INFORMACION DE ESTUDIANTE.\r\n3- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n4- CONSULTAR INFORMACION DE TODOS LOS ESTUDIANTES REGISTRADOS.\r\n5- REGISTRAR CALIFICACIONES DE ESTUDIANTE.\r\n6- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n7- CONSULTAR CALIFICACIONES DE TODOS LOS ESTUDIANTES.\r\n0- PARA SALIR.");
+                    Console.WriteLine("1- REGISTRAR ESTUDIANTE.\r\n2- MODIFICAR INFORMACION DE ESTUDIANTE.\r\n3- CONSULTAR INFORMACION DE ESTUDIANTE.\r\n4- CONSULTAR INFORMACION DE TODOS LOS ESTUDIANTES REGISTRADOS.\r\n5- REGISTRAR CALIFICACIONES DE ESTUDIANTE.\r\n6- CONSULTAR CALIFICACIONES DE ESTUDIANTE.\r\n7- CONSULTAR CALIFICACIONES DE TODOS LOS ESTUDIANTES.\r\n0- PARA SALIR.");
                 }
 
                 if (Seleccion != 1 && Seleccion != 2 && Seleccion != 3 && Seleccion != 4 && Seleccion != 5 && Seleccion != 6 && Seleccion != 7 && Seleccion != 0)
@@ -94,30 +94,54 @@ namespace Registro_Escuela
                 Console.Title = "Registro De Nuevo Estudiante";
                 Console.Clear();
                 Console.Write("Nombre estudiante: ");
-                _estudiante.Nombre = Console.ReadLine().ToUpper();
+                _estudiante.Nombre = Console.ReadLine().Trim().ToUpper();
 
-                while(!Validar.SoloLetras(_estudiante.Nombre))
+                while(!Validar.SoloLetras(_estudiante.Nombre) || string.IsNullOrEmpty(_estudiante.Nombre) || string.IsNullOrWhiteSpace(_estudiante.Nombre))
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("EL NOMBRE NO PUEDE CONTENER LETRAS. ");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.ReadKey();
+
+                    if(!Validar.SoloLetras(_estudiante.Nombre))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("EL NOMBRE NO PUEDE CONTENER NUMEROS.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ReadKey();
+                    }
+
+                    if (string.IsNullOrEmpty(_estudiante.Nombre) || string.IsNullOrWhiteSpace(_estudiante.Nombre))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("EL NOMBRE NO PUEDE ESTAR VACIO O SER SOLO ESPACIO.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ReadKey();
+                    }
+
                     Console.Clear();
                     Console.Write("Nombre estudiante: ");
                     _estudiante.Nombre = Console.ReadLine().ToUpper();
                 }
 
                 Console.Write("Apellido del estudiante: ");
-                _estudiante.Apellido = Console.ReadLine().ToUpper();
+                _estudiante.Apellido = Console.ReadLine().Trim().ToUpper();
 
-                while (!Validar.SoloLetras(_estudiante.Apellido))
+                while (!Validar.SoloLetras(_estudiante.Apellido) || string.IsNullOrEmpty(_estudiante.Apellido) || string.IsNullOrWhiteSpace(_estudiante.Apellido))
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("EL APELLIDO NO PUEDE CONTENER LETRAS. ");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.ReadKey();
+                    if (!Validar.SoloLetras(_estudiante.Apellido))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("EL APELLIDO NO PUEDE CONTENER NUMEROS.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ReadKey();
+                    }
+
+                    if(string.IsNullOrEmpty(_estudiante.Apellido) || string.IsNullOrWhiteSpace(_estudiante.Apellido))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("EL APELLIDO NO PUEDE ESTAR VACIO O SER SOLO ESPACIOS.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+
                     Console.Clear();
                     Console.Write("Apellido del estudiante: ");
                     _estudiante.Apellido = Console.ReadLine().ToUpper();
@@ -157,11 +181,12 @@ namespace Registro_Escuela
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("EL GRADO DE ESTUDIANTE SOLO PUEDE SER: 1ro/2do/3ro/4to");
                         Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("Grado que va cursando el estudiante: ");
                     }
 
                     _estudiante.Grado = Console.ReadLine().ToLower();
 
-                } while (_estudiante.Grado != "1ro" || _estudiante.Grado != "2do" || _estudiante.Grado != "3ro" || _estudiante.Grado != "4to");
+                } while (_estudiante.Grado != "1ro" && _estudiante.Grado != "2do" && _estudiante.Grado != "3ro" && _estudiante.Grado != "4to");
 
                 _estudiante.Estado = "N/D";
                 Console.Clear();
@@ -320,9 +345,16 @@ namespace Registro_Escuela
                         else
                             if (Lista_Materias[x].Promedio <= 69)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
-                            Console.ForegroundColor = ConsoleColor.White;
+                            if(Lista_Materias[x].Promedio == 0)
+                            {
+                                Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
                         }
 
                         Console.WriteLine("================================================================");
@@ -360,11 +392,18 @@ namespace Registro_Escuela
                         Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
                     }
                     else
-                        if (Lista_Materias[x].Promedio <= 69)
+                            if (Lista_Materias[x].Promedio <= 69)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        if (Lista_Materias[x].Promedio == 0)
+                        {
+                            Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Estado    : {0}", Lista_Estudiante[x].Estado);
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
                     }
 
                     Console.WriteLine("================================================================");
@@ -566,16 +605,23 @@ namespace Registro_Escuela
                         Console.WriteLine("Nota de Quimica          : {0}", Lista_Materias[x].Quimica);
                         Console.WriteLine("Promedio                 : {0}", Lista_Materias[x].Promedio);
 
-                        if (Lista_Materias[x].Promedio >= 70 )
+                        if (Lista_Materias[x].Promedio >= 70)
                         {
-                            Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
+                            Console.WriteLine("Estado                   : {0}", Lista_Estudiante[x].Estado);
                         }
                         else
-                            if(Lista_Materias[x].Promedio <= 69)
+                            if (Lista_Materias[x].Promedio <= 69)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
-                            Console.ForegroundColor = ConsoleColor.White;
+                            if (Lista_Materias[x].Promedio == 0)
+                            {
+                                Console.WriteLine("Estado                   : {0}", Lista_Estudiante[x].Estado);
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Estado                   : {0}", Lista_Estudiante[x].Estado);
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
                         }
 
                         Console.WriteLine("================================================================");
@@ -611,14 +657,21 @@ namespace Registro_Escuela
 
                     if (Lista_Materias[x].Promedio >= 70)
                     {
-                        Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
+                        Console.WriteLine("Estado                   : {0}", Lista_Estudiante[x].Estado);
                     }
                     else
-                        if (Lista_Materias[x].Promedio <= 69)
+                            if (Lista_Materias[x].Promedio <= 69)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Estado                   : {0} ", Lista_Estudiante[x].Estado);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        if (Lista_Materias[x].Promedio == 0)
+                        {
+                            Console.WriteLine("Estado                   : {0}", Lista_Estudiante[x].Estado);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Estado                   : {0}", Lista_Estudiante[x].Estado);
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
                     }
 
                     Console.WriteLine("================================================================");
